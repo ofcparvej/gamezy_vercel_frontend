@@ -32,9 +32,9 @@ const Login = () => {
           const res = await axios.post('https://gamezy-vercel-backend.onrender.com/api/auth/login', user);
 
             // const res = await apiConnector("POST",'http://localhost:4000/api/auth/login', user)
-            console.log("data---------->" , res.data)
+            console.log("data---------->" , res)
             // res.data && window.location.replace("/homepage");
-            // if (res.status === 200) {
+            if (res.status === 200) {
                 
                 // console.log("res===>>>>>::",res.data.foundUser);
                 
@@ -49,7 +49,7 @@ const Login = () => {
               //   //..................
               //   // console.log(response);
                 // navigate("/homepage");
-              // }
+              }
 
             // console.log("result is::",res);
           // } catch (error) {
