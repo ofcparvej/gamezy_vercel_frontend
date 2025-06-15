@@ -20,7 +20,8 @@ const handleSubmit = async(e)=> {
     const user = {username,email,password};
     console.log("user-->>>",user);
     try {
-      const res = await apiConnector("POST",'http://localhost:4000/api/auth/signup', user)
+      // const res = await apiConnector("POST",'http://localhost:4000/api/auth/signup', user)
+      const res = await apiConnector("POST",'https://gamezy-vercel-backend.onrender.com/api/auth/signup', user)
       res.data && window.location.replace("/");
       console.log("result is::",res);
     } catch (error) {
