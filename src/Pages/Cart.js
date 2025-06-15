@@ -161,7 +161,7 @@ try{
           'Content-Type':'application/json'
         }
         //   console.log("clicked--->")
-        const res = await axios.post("http://localhost:4000/api/payment/create-checkout-session" , body , headers );
+        const res = await axios.post("https://gamezy-vercel-backend.onrender.com/api/payment/create-checkout-session" , body , headers );
 
         console.log("res--------->" , res)
     
