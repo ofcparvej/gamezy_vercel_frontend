@@ -29,7 +29,7 @@ const Login = () => {
 
           // try {
 
-          const res = await axios.post('http://localhost:4000/api/auth/login', user);
+          const res = await axios.post('https://gamezy-vercel-backend.onrender.com/api/auth/login', user);
 
             // const res = await apiConnector("POST",'http://localhost:4000/api/auth/login', user)
             console.log("data---------->" , res.data)
