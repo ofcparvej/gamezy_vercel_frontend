@@ -47,7 +47,7 @@ const Cart = () => {
 
         try {
           // const res = await apiConnector("GET",`http://localhost:4000/api/cart/getcart/${data.id}`);
-          const res = await axios.get(`http://localhost:4000/api/cart/getcart/${data.id}`);
+          const res = await axios.get(`https://gamezy-vercel-backend.onrender.com/api/cart/getcart/${data.id}`);
           console.log("getCartres==>" , res)
           setCart(res?.data?.user?.cart);
           res && calculate();
@@ -65,7 +65,7 @@ const Cart = () => {
 
 
 try{
-         const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/increase/${id}`);
+         const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/increase/${id}`);
     const updatedItem = res?.data?.updatedItem; // Assume backend returns updated item
 
     setCart(prevCart =>
@@ -87,7 +87,7 @@ try{
 
 
         try {
-        const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/decrease/${id}`);
+        const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/decrease/${id}`);
         const updatedItem = res?.data?.updatedItem;
 
         setCart(prevCart =>
@@ -110,7 +110,7 @@ try{
 
 
         try {
-        const res = await axios.delete(`http://localhost:4000/api/cart/removeitem/${data.id}/${id}`);
+        const res = await axios.delete(`https://gamezy-vercel-backend.onrender.com/api/cart/removeitem/${data.id}/${id}`);
         
         setCart(prevCart => prevCart.filter(item => item._id !== id));
       } catch (error) {
@@ -124,7 +124,7 @@ try{
 
       const emptyCart=async()=>{
         try {
-          const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/empty`);
+          const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/empty`);
           console.log("empty--->" , res)
           setCart(res.data);
         } catch (error) {
@@ -178,10 +178,10 @@ try{
           } else {
             
               // setUpdatedCart(cart);
-              const empty = await axios.post(`http://localhost:4000/api/cart/${data.id}/empty`);    // updatedCart.map tha
+              const empty = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/empty`);    // updatedCart.map tha
               await Promise.all(
                 cart.map(async (item) => {
-                  await axios.post(`http://localhost:4000/api/order/${data.id}`, {
+                  await axios.post(`https://gamezy-vercel-backend.onrender.com/api/order/${data.id}`, {
                     name: item.name,
                     price: item.price,
                     quantity: item.quantity,
