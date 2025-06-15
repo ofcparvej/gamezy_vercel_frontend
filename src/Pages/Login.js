@@ -80,7 +80,7 @@ const Login = () => {
               <input
                 type="email"
                 value={email}
-                className=" rounded-3xl h-10 px-3 my-3 outline-none  bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-100 "
+                className="rounded-3xl h-10 px-3 my-3 outline-none  bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-100 text-white "
                 placeholder="Email"
 
                 onChange={(e) => {
@@ -90,7 +90,7 @@ const Login = () => {
               <input
                 type="password"
                 value={password}
-                className=" rounded-3xl h-10 px-3 my-3 outline-none text-white  bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-100"
+                className=" rounded-3xl h-10 px-3 my-3 outline-none  bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-100 text-white"
                 placeholder="Password"
                 onChange={(e) => {
                   setPassword(e.target.value);
