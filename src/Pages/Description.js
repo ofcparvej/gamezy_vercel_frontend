@@ -1,0 +1,288 @@
+import React from "react";
+import Navbar from "../Components/Navbar";
+import Sidebar from "../Components/Sidebar";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { FaGlobeAsia } from "react-icons/fa";
+// import { useState } from "react";
+import { ImReddit } from "react-icons/im";
+import "@splidejs/react-splide/css";
+import { Rate } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { apiConnector } from "../services/apiconnector";
+
+
+
+const Description = () => {
+
+    const [game,setGame] = useState([]);
+    const [screenshots, setScreenshots] = useState([]);
+    const [isloading, setIsloading] = useState(true);
+    const [wishlisted, setWishlisted] = useState(false);
+    const[added,setAdded]=useState(false)
+    const [removed,setRemoved]=useState(true);
+    const data = useSelector((state) => state.auth);
+    const { id } = useParams();
+    const rand = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
+    // const [cart, setCart] = useState([]);
+
+    // console.log("data data ->>>>>>>>",data);
+
+    const authe = useSelector((store) => store.auth);
+    // console.log("authiiiiiiiiiiiii->>>>>>>>>>>>>>" , data)
+    // const auth = useSelector((store) => store.auth.password);
+    // console.log("Authe in description",authe);
+
+
+
+    const getGameData = async() => {
+        try {
+               const res = await axios.get(`https://api.rawg.io/api/games/${id}?key=45f59e1704f8461689b89fa64f35877b`);
+              //  console.log(res);
+               setGame(res.data);
+
+        } catch (err) {
+            console.log("error in fetching" , err);
+        }
+    }
+
+    const getScreenshots = async () => {
+        const res = await axios.get(
+          `https://api.rawg.io/api/games/${id}/screenshots?key=45f59e1704f8461689b89fa64f35877b`
+        );
+        // console.log("game Screenshots", res.data.results);
+        setScreenshots(res.data.results);
+      };
+
+
+
+          //  const user= {
+          //   name: game.name,
+          //   price: rand,
+          // }
+
+
+
+
+      const addCart = async (name,price) => {
+        console.log("dataAddCart----->" , data)
+        try {
+          const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/additem/${data.id}`, {
+            name: name,
+            price: price,
+          });
+          console.log("res=>" ,res)
+          if (res.status === 200) {
+            setAdded(true)
+            setRemoved(!removed);
+            console.log("added to cart");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      const setWishlist = async () => {
+        try {
+          console.log("setwishlist ------>")
+          const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}`, {
+            name: game.name,
+            price: rand,
+          });
+          console.log("wish--->" , res);
+          if (res.status === 200) {
+            console.log("added to wishlist");
+            setWishlisted(true);
+          } else {
+            console.log("error");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+
+    //   const remove = async(id)=> {
+
+    //     try {
+    //       const res = await apiConnector("POST",`http://localhost:4000/api/cart/${data.id}/decrease/${id}`);
+
+
+    //       setCart(res?.data?.user?.cart);
+    //     } catch (error) {
+    //       console.error('Failed to post data:', error);
+    //     }
+
+    // };
+
+
+    useEffect(() => {
+        setIsloading(true);
+        getGameData();
+        getScreenshots();
+        setIsloading(false);
+      }, []);
+
+      console.log("remode??",removed);
+
+
+
+      return (
+        <div className="bg-black ">
+          <Navbar />
+          <div className="pt-[80px] p-10 ">
+            <div className="mb-10 px-24">
+              <h1
+                className="text-5xl mb-3 flex flex-wrap text-white"
+                style={{ fontFamily: "Brolimo" }}
+              >
+                {game.name}
+              </h1>
+              <div className="flex items-center ">
+                <Rate disabled defaultValue={game.rating} />
+                <h1 className="text-2xl ml-5 text-white">{game.rating}</h1>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <div className="">
+                <div className="flex items-center justify-center ">
+                  <Splide
+                    className="max-h-[60rem] max-w-[80%]"
+                    options={{
+                      type: "loop",
+                      autoplay: "play",
+                      interval: 3000,
+                      pauseOnHover: false,
+                      arrows: true,
+                      pagination: true,
+                    }}
+                  >
+                    {screenshots.map((item) => {
+                      return (
+                        <SplideSlide>
+                          <img
+                            
+                            src={item.image}
+                            className="max-h-full max-w-full"
+                            alt=""
+                          />
+                        </SplideSlide>
+                      );
+                    })}
+                  </Splide>
+                </div>
+                <p className="text-lg px-24 mt-5 text-white" style={{ fontFamily: "Brolimo" }}>
+                  {game.description_raw}
+                </p>
+                <div className="flex px-24 mt-5">
+                  <div className="flex flex-col w-1/2 border-l-2 border-gray-700 pl-5">
+                    <h1 className="text-gray-300 text-2xl mb-3">Genres</h1>
+                    <ul className="flex gap-2 flex-wrap text-white">
+                      {game.genres?.map((item) => {
+                        return (
+                          <li   className="px-3 py-2 rounded-3xl bg-slate-800 ">
+                            {item.name}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                  <div className="flex flex-col w-1/2 border-l-2 border-gray-700 pl-5">
+                    <h1 className="text-gray-300 text-2xl mb-3 ">Features</h1>
+                    <ul className="flex gap-2 flex-wrap ">
+                      {game.tags?.map((item) => {
+                        return (
+                          <li  className="px-3 py-2 rounded-3xl bg-slate-800 text-white">
+                            {item.name}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <div className="px-24 mt-5">
+                  <h1 className="text-5xl mb-3 text-white">Official Links</h1>
+                  <div className="w-full h-20 bg-gray-800 flex justify-center items-center text-5xl text-white">
+                    <Link to={game.website}>
+                      <FaGlobeAsia className="mx-5 cursor-pointer" />
+                    </Link>
+                    <Link to={game.reddit_url}>
+                      <ImReddit className="mx-5 cursor-pointer" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="min-w-[400px] max-w-[400px]  p-5">
+                <div className="flex items-center justify-center mb-3">
+                  <img
+                    src={game.background_image}
+                    alt=""
+                    className="w-[200px] h-[200px] rounded-2xl "
+                  />
+                </div>
+    
+                <p
+                  className="bg-[#202020] p-2  w-[7rem] text-sm text-center mb-3 text-white"
+                  style={{ fontFamily: "Brolimo" }}
+                >
+                  BASE GAME
+                </p>
+                <p className="text-xl mb-3 text-white">₹{rand}</p>
+                <div className="flex flex-col">
+                
+                  <button className={`h-10 w-full border-[1px] ${added ? "bg-white text-black" : "bg-black text-white"} border-white rounded-lg text-lg mb-3`} onClick={()=>{addCart(game.name,rand)}} disabled={added ? true : false}>
+                     {added ? "Added to cart" : "ADD TO CART"}
+                  </button>
+                  {/* { (!removed)? (
+                                    <button  className={`h-10 w-full border-[1px] ${added ? "bg-white text-black" : "bg-black text-white"} border-white rounded-lg text-lg mb-3`} onClick={()=>{addCart(game.name,rand)}} disabled={added ? true : false}>
+                                       {added? 'Remove':'not added'}
+                                    </button>   
+                  ):(
+                            <h1>added</h1>
+                  )
+                                                  
+                  } */}
+
+
+
+                  <button
+                    className={`h-8 w-full border-[1px] ${
+                      wishlisted ? "bg-white text-black" : "bg-black text-white"
+                    } border-white rounded-lg text-lg mb-3`}
+                    disabled={wishlisted ? true : false}
+                    onClick={() => setWishlist()}
+                  >
+                    {wishlisted ? "Added to wishlist" : "ADD TO WISHLIST"}
+                  </button>
+                </div>
+                <ul>
+                  <li>
+                    <div className="flex justify-between text-xl pb-3 border-b-2 border-[#616161] mb-2">
+                      <p className="text-white">Developer</p>
+                      <p className="text-white">
+                        {game.developers &&
+                          game.developers[0] &&
+                          game.developers[0].name}
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between text-xl pb-3 border-b-2 border-[#616161] mb-2">
+                      <p className="text-white">Publishers</p>
+                      <p className="text-white">
+                        {game.publishers &&
+                          game.publishers[0] &&
+                          game.publishers[0].name}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+}
+
+export default Description
