@@ -1,23 +1,15 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-// import "../index.css";
-// import "./App.css";
-// import './index.css';
 import "@splidejs/react-splide/css/core";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import "@splidejs/react-splide/css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import Cards from "../Components/Cards";
 import Cards from "../Components/Cards";
 import { useMediaQuery } from "react-responsive";
-import { useNavigate,Link } from "react-router-dom";
-
-import { useSelector } from 'react-redux';
-
-
-
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -27,7 +19,7 @@ const Home = () => {
   const [genres, setGenres] = useState([]);
   const isMid = useMediaQuery({ maxWidth: 766 });
   const [isloading, setIsloading] = useState(true);
-  const [added,setAdded]=useState(false)
+  const [added, setAdded] = useState(false);
   const getCarousel = async () => {
     try {
       const res = await axios.get(
@@ -49,7 +41,7 @@ const Home = () => {
       console.error("Error fetching action data:", error);
     }
   };
- 
+
   const getPuzzle = async () => {
     try {
       const res = await axios.get(
@@ -87,10 +79,6 @@ const Home = () => {
 
     fetchData();
   }, []);
-
-  // console.log("carousel is>>>>",carousel);
-
-  
 
   return (
     <div className=" bg-black">
@@ -133,10 +121,10 @@ const Home = () => {
                           fantasy novels by Andrzej Sapkowski.
                         </p>
                         <div className="flex mt-5">
-                         <Link to={`/description/${item.id}`}>
-                          <button className="flex items-center justify-center w-[8rem] h-[3rem] text-xl bg-white text-black border-2 border-white hover:bg-black hover:text-white rounded-xl">
-                          Discover{" "}
-                          </button>
+                          <Link to={`/description/${item.id}`}>
+                            <button className="flex items-center justify-center w-[8rem] h-[3rem] text-xl bg-white text-black border-2 border-white hover:bg-black hover:text-white rounded-xl">
+                              Discover{" "}
+                            </button>
                           </Link>
                         </div>
                       </div>
@@ -153,7 +141,7 @@ const Home = () => {
           </div>
 
           {isloading ? (
-            <h1 className="bg-black">Loading...</h1>
+            <h1 className="bg-black text-white">Loading...</h1>
           ) : (
             <Splide
               className="flex items-center justify-center p-12 md:p-20 bg-black"
@@ -231,30 +219,28 @@ const Home = () => {
           <div className="flex items-center justify-between mb-5 text-4xl">
             <h1 className="text-white">Get by Genres</h1>
             <Link to="/catagory">
-            <h1 className=" underline text-white">See more</h1>
+              <h1 className=" underline text-white">See more</h1>
             </Link>
-          
           </div>
           {isloading ? (
-            <h1 className="bg-black">Loading..</h1>
+            <h1 className="bg-black text-white">Loading..</h1>
           ) : (
             <div className="grid grid-cols-5  gap-y-5">
               {genres.map((item) => (
                 <Link to={`/catagory/${item.slug}`}>
-                <div class="h-[8rem] w-[15rem] relative rounded-2xl">
-                  <img
-                    src={item.image_background}
-                    alt=""
-                    class="absolute h-full object-cover w-full opacity-60 rounded-2xl"
-                  />
-                  <h1 class="absolute px-20 py-10 text-white text-3xl ">
-                    {item.name}
-                  </h1>
-                </div>
+                  <div class="h-[8rem] w-[15rem] relative rounded-2xl">
+                    <img
+                      src={item.image_background}
+                      alt=""
+                      class="absolute h-full object-cover w-full opacity-60 rounded-2xl"
+                    />
+                    <h1 class="absolute px-20 py-10 text-white text-3xl ">
+                      {item.name}
+                    </h1>
+                  </div>
                 </Link>
               ))}
             </div>
-        
           )}
         </div>
       </div>
