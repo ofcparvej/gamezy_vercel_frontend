@@ -10,7 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { apiConnector } from "../services/apiconnector";
+
 
 const Description = () => {
   const [game, setGame] = useState([]);
