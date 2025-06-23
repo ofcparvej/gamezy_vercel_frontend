@@ -47,7 +47,7 @@ const Categories = () => {
          <div className='pt-[80px] p-10'>
     <h1 className='text-5xl mb-5 '>Genres</h1>
     {
-      isloading?<h1 className='text-gray-50'>Loading...</h1>:(
+      isloading?<h1>Loading...</h1>:(
         <div className='grid grid-cols-5 gap-y-4'>
         {catagory.map((item)=>{
           return(
@@ -59,6 +59,7 @@ const Categories = () => {
                     alt=""
                     class="absolute h-full object-cover w-full opacity-60 rounded-2xl"
                   />
+                  <h1 className='text-slate-900'>hii</h1>
                   <h1 class="absolute px-20 py-10 text-white text-3xl ">{item.name}</h1>
                 </div>
                 </Link>

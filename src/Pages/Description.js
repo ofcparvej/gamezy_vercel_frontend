@@ -69,7 +69,7 @@ const Description = () => {
       const addCart = async (name,price) => {
         console.log("dataAddCart----->" , data)
         try {
-          const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/additem/${data.id}`, {
+          const res = await axios.post(`http://localhost:4000/api/cart/additem/${data.id}`, {
             name: name,
             price: price,
           });
@@ -86,7 +86,7 @@ const Description = () => {
       const setWishlist = async () => {
         try {
           console.log("setwishlist ------>")
-          const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}`, {
+          const res = await axios.post(`http://localhost:4000/api/wishlist/${data.id}`, {
             name: game.name,
             price: rand,
           });

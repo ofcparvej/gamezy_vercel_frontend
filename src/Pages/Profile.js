@@ -32,7 +32,7 @@ const Profile = () => {
   };
   const getWishlist = async () => {
     try {
-      const res = await axios.get(`https://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}`);     
+      const res = await axios.get(`http://localhost:4000/api/wishlist/${data.id}`);     
       console.log("GetwishList---->" , res)
       
       setWishlist(Array.isArray(res.data) ? res.data : []);
@@ -44,7 +44,7 @@ const Profile = () => {
   const deleteWishlist = async (id) => {
     // console.log("II=>" , id)   
     // try {
-    //   const res = await axios.delete(`https://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}/${id}`);
+    //   const res = await axios.delete(`http://localhost:4000/api/wishlist/${data.id}/${id}`);
     //   // const res = await axios.get(`/wishlist/${data.id}`);   
     //   setWishlist(res.data);
     //   res.data && navigate("/profile")
@@ -55,7 +55,7 @@ const Profile = () => {
 
 
     try {
-    await axios.delete(`https://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}/${id}`);
+    await axios.delete(`http://localhost:4000/api/wishlist/${data.id}/${id}`);
     
     // Locally remove the deleted item from the list
     setWishlist((prevWishlist) =>
@@ -73,7 +73,7 @@ const Profile = () => {
   const addCart = async (name,price) => {
     console.log("add cart client---------------->")
     try {
-      const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/additem/${data.id}`, {
+      const res = await axios.post(`http://localhost:4000/api/cart/additem/${data.id}`, {
         name: name,
         price: price,
       });
@@ -87,7 +87,7 @@ const Profile = () => {
   };
   const getOrders = async () => {
     try {
-      const res = await axios.get(`https://gamezy-vercel-backend.onrender.com/api/order/${data.id}`);
+      const res = await axios.get(`http://localhost:4000/api/order/${data.id}`);
       console.log("Örders",res.data)
       setOrders(res.data);
     } catch (error) { 

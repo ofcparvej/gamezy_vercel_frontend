@@ -153,7 +153,7 @@ const Home = () => {
           </div>
 
           {isloading ? (
-            <h1 className="bg-black text-white">Loading...</h1>
+            <h1 className="bg-black">Loading...</h1>
           ) : (
             <Splide
               className="flex items-center justify-center p-12 md:p-20 bg-black"
@@ -236,7 +236,7 @@ const Home = () => {
           
           </div>
           {isloading ? (
-            <h1 className="bg-black text-white">Loading..</h1>
+            <h1 className="bg-black">Loading..</h1>
           ) : (
             <div className="grid grid-cols-5  gap-y-5">
               {genres.map((item) => (

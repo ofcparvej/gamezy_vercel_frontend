@@ -47,7 +47,7 @@ const Cart = () => {
 
         try {
           // const res = await apiConnector("GET",`http://localhost:4000/api/cart/getcart/${data.id}`);
-          const res = await axios.get(`https://gamezy-vercel-backend.onrender.com/api/cart/getcart/${data.id}`);
+          const res = await axios.get(`http://localhost:4000/api/cart/getcart/${data.id}`);
           console.log("getCartres==>" , res)
           setCart(res?.data?.user?.cart);
           res && calculate();
@@ -62,10 +62,20 @@ const Cart = () => {
 
     const increment = async(id)=> {
 
+        // try {
+        //   // const res = await apiConnector("POST",`http://localhost:4000/api/cart/${data.id}/increase/${id}`);
 
+        //    const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/increase/${id}`);
+        //    console.log("incre RES ->",res);
+        // // console.log("after increament--->>" , res?.data?.user?.cart);
+        
+        //   setCart(res?.data?.user?.cart);
+        // } catch (error) {
+        //   console.error('Failed to post data:', error);
+        // }
 
 try{
-         const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/increase/${id}`);
+         const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/increase/${id}`);
     const updatedItem = res?.data?.updatedItem; // Assume backend returns updated item
 
     setCart(prevCart =>
@@ -84,10 +94,17 @@ try{
       
     const decrement = async(id)=> {
 
+        // try {
+        //   // const res = await apiConnector("POST",`http://localhost:4000/api/cart/${data.id}/decrease/${id}`);
+        //   const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/decrease/${id}`);
 
+        //   setCart(res?.data?.user?.cart);
+        // } catch (error) {
+        //   console.error('Failed to post data:', error);
+        // }
 
         try {
-        const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/decrease/${id}`);
+        const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/decrease/${id}`);
         const updatedItem = res?.data?.updatedItem;
 
         setCart(prevCart =>
@@ -107,10 +124,17 @@ try{
     const deletecart = async(id)=> {
       console.log("idd del =>" , id)
 
-
+      // try {
+      //   // const res = await apiConnector("DELETE",`http://localhost:4000/api/cart/removeitem/${data.id}/${id}`);
+      //   const res = await axios.delete(`http://localhost:4000/api/cart/removeitem/${data.id}/${id}`);
+      //   console.log("deleted->res==>" , res)
+      //   setCart(res?.data?.user?.cart);
+      // } catch (error) {
+      //   console.error('Failed to post data:', error);
+      // }
 
         try {
-        const res = await axios.delete(`https://gamezy-vercel-backend.onrender.com/api/cart/removeitem/${data.id}/${id}`);
+        const res = await axios.delete(`http://localhost:4000/api/cart/removeitem/${data.id}/${id}`);
         
         setCart(prevCart => prevCart.filter(item => item._id !== id));
       } catch (error) {
@@ -121,10 +145,19 @@ try{
   };
 
 
+    // const calculate = () => {
+    //     let newTotal = 0;
+
+    //     cart.forEach((item) => {
+    //       newTotal += item.price * item.quantity;
+    //     });
+    //     setTotal(newTotal);
+    //     console.log("len",total);
+    //   };
 
       const emptyCart=async()=>{
         try {
-          const res = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/empty`);
+          const res = await axios.post(`http://localhost:4000/api/cart/${data.id}/empty`);
           console.log("empty--->" , res)
           setCart(res.data);
         } catch (error) {
@@ -161,7 +194,7 @@ try{
           'Content-Type':'application/json'
         }
         //   console.log("clicked--->")
-        const res = await axios.post("https://gamezy-vercel-backend.onrender.com/api/payment/create-checkout-session" , body , headers );
+        const res = await axios.post("http://localhost:4000/api/payment/create-checkout-session" , body , headers );
 
         console.log("res--------->" , res)
     
@@ -178,10 +211,10 @@ try{
           } else {
             
               // setUpdatedCart(cart);
-              const empty = await axios.post(`https://gamezy-vercel-backend.onrender.com/api/cart/${data.id}/empty`);    // updatedCart.map tha
+              const empty = await axios.post(`http://localhost:4000/api/cart/${data.id}/empty`);    // updatedCart.map tha
               await Promise.all(
                 cart.map(async (item) => {
-                  await axios.post(`https://gamezy-vercel-backend.onrender.com/api/order/${data.id}`, {
+                  await axios.post(`http://localhost:4000/api/order/${data.id}`, {
                     name: item.name,
                     price: item.price,
                     quantity: item.quantity,
