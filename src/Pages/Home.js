@@ -26,6 +26,7 @@ const Home = () => {
         "https://api.rawg.io/api/games?key=45f59e1704f8461689b89fa64f35877b&page_size=10&platforms=187"
       );
       setCarousel(res.data.results);
+      console.log("Res-->" ,res.data.results );
     } catch (error) {
       console.error("Error fetching carousel data:", error);
     }
@@ -106,21 +107,15 @@ const Home = () => {
                       alt="The Witcher 3"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black via-black to-transparent opacity-[65%] rounded-3xl"></div>
-                    <div className="hero__slide__content absolute top-[15%] md:w-[40rem] w-[50rem]">
-                      <div>
+                    <div className="hero__slide__content absolute top-[15%] md:w-[40rem] w-[50rem] h-screen flex items-center">
+                      <div className="relative flex flex-col gap-[30px] mb-[50px] ml-[40px]">
                         <h2
-                          className="hero__slide__title text-5xl text-white"
+                          className="relative hero__slide__title text-4xl text-white "
                           style={{ fontFamily: "Brolimo" }}
                         >
                           {item.name}
                         </h2>
-                        <p className="hero__slide__description text-lg mt-5 pr-[25rem] text-white">
-                          The Witcher 3: Wild Hunt is a 2015 action role-playing
-                          game developed and published by Polish developer CD
-                          Projekt Red and is based on The Witcher series of
-                          fantasy novels by Andrzej Sapkowski.
-                        </p>
-                        <div className="flex mt-5">
+                        <div className="relative flex ">
                           <Link to={`/description/${item.id}`}>
                             <button className="flex items-center justify-center w-[8rem] h-[3rem] text-xl bg-white text-black border-2 border-white hover:bg-black hover:text-white rounded-xl">
                               Discover{" "}
