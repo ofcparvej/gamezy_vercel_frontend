@@ -15,7 +15,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const options = ["Profile", "Cart", "Log Out"];
   const handleOptionClick = (option) => {
-    // console.log("option is--->>",option);
     setSelectedOption(option);
     setIsOpen(false);
   };
