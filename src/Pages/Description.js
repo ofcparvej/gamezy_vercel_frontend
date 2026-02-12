@@ -65,7 +65,7 @@ const Description = () => {
   const setWishlist = async () => {
     try {
       const res = await axios.post(
-        `hhttps://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}`,
+        `https://gamezy-vercel-backend.onrender.com/api/wishlist/${data.id}`,
         {
           name: game.name,
           price: rand,
