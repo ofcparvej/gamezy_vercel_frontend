@@ -26,7 +26,7 @@ const Home = () => {
         "https://api.rawg.io/api/games?key=45f59e1704f8461689b89fa64f35877b&page_size=10&platforms=187"
       );
       setCarousel(res.data.results);
-      console.log("Res-->" ,res.data.results );
+      // console.log("Res-->" ,res.data.results );
     } catch (error) {
       console.error("Error fetching carousel data:", error);
     }
