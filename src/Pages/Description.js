@@ -52,11 +52,11 @@ const Description = () => {
           price: price,
         }
       );
-      console.log("res=>", res);
+      // console.log("res=>", res);
       if (res.status === 200) {
         setAdded(true);
         setRemoved(!removed);
-        console.log("added to cart");
+        // console.log("added to cart");
       }
     } catch (error) {
       console.log(error);
