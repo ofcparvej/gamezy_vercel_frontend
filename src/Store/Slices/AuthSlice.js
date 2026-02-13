@@ -36,7 +36,7 @@ const authSlice = createSlice ({
     }
 })
 
-console.log("authSlice is==>>",authSlice.actions);
+//console.log("authSlice is==>>",authSlice.actions);
 
 export const {logInUser,logOutUser} = authSlice.actions;
 export default authSlice.reducer;
