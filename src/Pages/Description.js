@@ -88,7 +88,7 @@ const Description = () => {
     setIsloading(false);
   }, []);
 
-  console.log("remode??", removed);
+  // console.log("remode??", removed);
 
   return (
     <div className="bg-black ">
